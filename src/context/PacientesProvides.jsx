@@ -1,11 +1,15 @@
 import { createContext, useState, useEffect } from "react";
 import clienteAxios from "../config/axios";
+import useAuth from "../../hooks/useAuth";
 
 const PacientesContext = createContext();
 
 export const PacientesProvider = ({ children }) => {
+
   const [pacientes, setPacientes] = useState([]);
   const [paciente, setPaciente] = useState({});
+
+  const { auth } = useAuth();
 
 
   const format = (fecha) => {
@@ -28,28 +32,29 @@ export const PacientesProvider = ({ children }) => {
 
   }
 
-  useEffect(() => {
-    const obtenerPacientes = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
+   useEffect(() => {
+        const obtenerPacientes = async () => {
 
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
+            try {
+                const token = localStorage.getItem('token')
+                if(!token) return
 
-        const { data } = await clienteAxios("/pacientes", config);
-        setPacientes(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+                const config = {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                }
 
-    obtenerPacientes();
-  }, []);
+                const { data } = await clienteAxios('/pacientes', config)
+                setPacientes(data)
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        obtenerPacientes()
+    }, [auth])
 
   const guardarPaciente = async (paciente) => {
 
