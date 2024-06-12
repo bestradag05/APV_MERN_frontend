@@ -26,7 +26,6 @@ const AuthProvider = ({ children }) => {
 
             try {
                 const { data } = await clienteAxios('/veterinarios/perfil', config);
-                console.log(data);
                 setAuth(data);
 
             } catch (error) {
@@ -76,7 +75,7 @@ const AuthProvider = ({ children }) => {
         }
     }
 
-    const guardarPassword = async (datos) =>{
+    const guardarPassword = async (datos) => {
         const token = localStorage.getItem('token');
 
         if (!token) {

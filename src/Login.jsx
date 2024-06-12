@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Alerta from "./components/Alerta";
 import clienteAxios from "./config/axios";
@@ -16,28 +16,30 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if([email, password].includes("")){
-        setAlerta({
-            msg: 'Todos los campos son obligatorios',
-            error: true
-        })
+    if ([email, password].includes("")) {
+      setAlerta({
+        msg: 'Todos los campos son obligatorios',
+        error: true
+      })
     }
 
     try {
-        const {data} = await clienteAxios.post('veterinarios/login', {
-            email,
-            password
-        });
 
-        localStorage.setItem('token', data.token);
-        setAuth(data);
-        navigate('/admin');
-        
+      const { data } = await clienteAxios.post('veterinarios/login', {
+        email,
+        password
+      });
+
+
+      localStorage.setItem('token', data.token);
+      setAuth(data);
+      navigate('/admin');
+
     } catch (error) {
-        setAlerta({
-            msg: error.response.data.msg,
-            error: true
-        })
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true
+      })
     }
   }
 
@@ -62,7 +64,7 @@ const Login = () => {
               placeholder="correo@correo.com"
               className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
               value={email}
-              onChange={ e => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
           </div>
 

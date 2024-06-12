@@ -21,8 +21,7 @@ const OlvidePassword = () => {
         {
           email,
         });
-        console.log(data);
-        setAlerta({msg: data.msg });
+      setAlerta({ msg: data.msg });
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,
