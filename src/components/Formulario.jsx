@@ -17,7 +17,7 @@ const Formulario = () => {
 
     useEffect(() => {
 
-        if(paciente?.nombre){
+        if (paciente?.nombre) {
             setNombre(paciente.nombre);
             setPropietario(paciente.propietario);
             setEmail(paciente.email);
@@ -25,16 +25,13 @@ const Formulario = () => {
             setSintomas(paciente.sintomas);
             setId(paciente._id);
         }
-       
+
 
     }, [paciente]);
 
-    console.log(paciente);
 
     const handleSubmit = e => {
         e.preventDefault();
-
-        console.log('Se ejecuto formulario')
 
         // Validar el formulario
 
@@ -48,7 +45,7 @@ const Formulario = () => {
             return
         }
 
-        
+
 
         guardarPaciente({
             nombre, propietario, email, fecha, sintomas, id
